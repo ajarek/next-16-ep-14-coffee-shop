@@ -1,0 +1,87 @@
+[
+    {
+        "id": 1,
+        "name": "Cappuccino classic",
+        "description": "A classic cappuccino with steamed milk and a sprinkle of cocoa powder",
+        "price": 2.99,
+        "image": "/images/cappuccino-1.png"
+    },
+    {
+        "id": 2,
+        "name": "Cappuccino Scuro",
+        "description": "Scuro cappuccino with steamed milk and a sprinkle of cocoa powder",
+        "price": 2.99,
+        "image": "/images/cappuccino.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Cappuccino Chiaro",
+        "description": "Chiaro cappuccino with steamed milk and a sprinkle of cocoa powder",
+        "price": 2.99,
+        "image": "/images/cappuccino.webp"
+    },
+    {
+        "id": 4,
+        "name": "Espresso Classico",
+        "description": "Classic espresso with steamed milk and a sprinkle of cocoa powder",
+        "price": 2.99,
+        "image": "/images/espresso-1.webp"
+    },
+    {
+        "id": 5,
+        "name": "Espresso Scuro",
+        "description": "Scuro espresso with steamed milk and a sprinkle of cocoa powder",
+        "price": 2.99,
+        "image": "/images/espresso.webp"
+    },
+    {
+        "id": 6,
+        "name": "Latte Classico",
+        "description": "Latte classico with steamed milk and a sprinkle of cocoa powder",
+        "price": 2.99,
+        "image": "/images/latte.png"
+    },
+    {
+        "id": 7,
+        "name": "Latte Macchiato",
+        "description": "Latte macchiato with steamed milk and a sprinkle of cocoa powder",
+        "price": 2.99,
+        "image": "/images/latte-1.png"
+    },
+    {
+        "id": 8,
+        "name": "Latte Mocha",
+        "description": "Latte mocha with steamed milk and a sprinkle of cocoa powder",
+        "price": 2.99,
+        "image": "/images/latte-1.webp"
+    },
+    {
+        "id": 9,
+        "name": "Ice Coffee",
+        "description": "Ice coffee with steamed milk and a sprinkle of cocoa powder",
+        "price": 2.99,
+        "image": "/images/macchiato-2.png"
+    },
+    {
+        "id": 10,
+        "name": "Americano",
+        "description": "Americano with steamed milk and a sprinkle of cocoa powder",
+        "price": 2.99,
+        "image": "/images/americano-1.png"
+    },
+    {
+        "id": 11,
+        "name": "Americano Classico",
+        "description": "Americano classico with steamed milk and a sprinkle of cocoa powder",
+        "price": 2.99,
+        "image": "/images/americano.png"
+    },
+    {
+        "id": 12,
+        "name": "Cafe au Lait",
+        "description": "Cafe au lait with steamed milk and a sprinkle of cocoa powder",
+        "price": 2.99,
+        "image": "/images/macchiato.webp"
+    }
+   
+]

@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { GamepadDirectional, Search } from "lucide-react"
+import coffee from "../../data/coffee.json"
+import Image from "next/image"
+import PhoneIndicators from "@/components/PhoneIndicators"
 
 const CoffeeList = () => {
   return (
@@ -19,6 +22,15 @@ const CoffeeList = () => {
               <GamepadDirectional />
             </Button>
           </div>
+        </div>
+        <div className="w-full grid grid-cols-2 gap-4 overflow-auto p-4 place-items-center">
+          <PhoneIndicators/>
+          {coffee.map((item) => (
+            <div key={item.id} className="flex flex-col items-center justify-center gap-2 ">
+              <Image src={item.image} alt={item.name} width={100} height={100} className="rounded-sm mask-t-from-50% mask-b-from-50% " />
+              <p>{item.name}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
