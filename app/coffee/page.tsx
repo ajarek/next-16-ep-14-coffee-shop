@@ -1,33 +1,32 @@
+'use client'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { GamepadDirectional, Plus, Search } from "lucide-react"
+import { Plus, Search } from "lucide-react"
 import coffee from "../../data/coffee.json"
 import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import Link from "next/link"
+import { useState } from "react"
 
 const CoffeeList = () => {
+  const [search, setSearch] = useState("")
   return (
-    <div className='w-full min-h-screen flex flex-col  items-center justify-start  font-sans '>
-      <div className='w-full min-h-64 flex flex-col items-center justify-center gap-5 bg-foreground px-4'>
-        <div className='flex items-center gap-2'>
+    <div className='w-full h-[852px] flex flex-col  items-center justify-start  font-sans '>
+      <div className='w-full h-32 flex flex-col items-center justify-center gap-5 bg-foreground px-4 pt-8 '>
+        <div className='w-full flex items-center gap-2'>
           <div className='w-full relative'>
-            <Input className='bg-white pl-10' placeholder='Search coffee' />
+            <Input type="search" className='bg-white pl-10' placeholder='Search coffee' value={search} onChange={(e) => setSearch(e.target.value)} />
             <span className='absolute left-2 top-2'>
               <Search className='text-foreground' />
             </span>
           </div>
-
-          <Button>
-            <GamepadDirectional />
-          </Button>
         </div>
       </div>
-      <div className='w-full grid grid-cols-2 gap-4 overflow-auto p-4 place-items-center'>
-        {coffee.map((item) => (
+      <div className='w-full h-[calc(852px-128px-64px)] grid grid-cols-2  gap-4 overflow-auto p-2 justify-items-center overflow-y-auto  scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-primary'>
+        {coffee.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())).map((item) => (
           <Card
             key={item.id}
-            className='flex flex-col items-start justify-start gap-2 '
+            className='flex flex-col items-start justify-start gap-2 max-h-66 '
           >
             <Image
               src={item.image}

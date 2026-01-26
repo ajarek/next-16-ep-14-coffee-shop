@@ -11,8 +11,8 @@ const CoffeeDetails = ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = use(params)
   const detailCoffee = coffee.find((item) => item.id === +id)
   return (
-    <div className='w-full min-h-screen flex flex-col  items-center justify-start  font-sans '>
-      <div className='w-full min-h-16 flex items-center justify-between px-4 pt-16 py-2 bg-foreground text-white'>
+    <div className='w-full h-[852px] flex flex-col  items-center justify-start  font-sans '>
+      <div className='w-full h-24 flex items-center justify-between gap-5 bg-foreground px-4 pt-8 text-white'>
         <Link href='/coffee'>
           <ChevronLeft size={30} className='' />
         </Link>
@@ -25,41 +25,52 @@ const CoffeeDetails = ({ params }: { params: Promise<{ id: string }> }) => {
           <Heart size={30} />{" "}
         </Link>
       </div>
-      <div>
-        <Image
-          src={detailCoffee?.image || ""}
-          alt={detailCoffee?.name || ""}
-          width={400}
-          height={400}
-          className='rounded-sm mask-t-from-50% mask-b-from-90%'
-        />
-      </div>
-      <div className='flex items-center justify-center gap-4 mt-4'>
-        <Button variant="outline" className="w-24 border-2 border-primary focus:bg-primary focus:text-white hover:bg-primary hover:text-white transition-colors cursor-pointer">
-          S
-        </Button>
-        <Button variant="outline" className="w-20 border-2 border-primary focus:bg-primary focus:text-white hover:bg-primary hover:text-white transition-colors cursor-pointer">
-          M
-        </Button>
-        <Button variant="outline" className="w-20 border-2 border-primary focus:bg-primary focus:text-white hover:bg-primary hover:text-white transition-colors cursor-pointer">
-          L
-        </Button>
-      </div>
-      <div className='flex flex-col items-start justify-start gap-4 p-4'>
-        <h1 className='text-2xl font-bold'>{detailCoffee?.name}</h1>
-        <p className='text-lg'>{detailCoffee?.description}</p>
-        <div className='flex items-center justify-center gap-3'>
-          <Button>
-            <Minus />
+      <div className='w-full h-[calc(852px-96px-64px)] '>
+        <div className='w-full flex items-center justify-center'>
+          <Image
+            src={detailCoffee?.image || ""}
+            alt={detailCoffee?.name || ""}
+            width={380}
+            height={380}
+            className='rounded-sm mask-t-from-50% mask-b-from-90%'
+          />
+        </div>
+        <div className='flex items-center justify-center gap-4 mt-4'>
+          <Button
+            variant='outline'
+            className='w-24 border-2 border-primary focus:bg-primary focus:text-white hover:bg-primary hover:text-white transition-colors cursor-pointer'
+          >
+            S
           </Button>
-          <p>1</p>
-          <Button>
-            <Plus />
+          <Button
+            variant='outline'
+            className='w-20 border-2 border-primary focus:bg-primary focus:text-white hover:bg-primary hover:text-white transition-colors cursor-pointer'
+          >
+            M
+          </Button>
+          <Button
+            variant='outline'
+            className='w-20 border-2 border-primary focus:bg-primary focus:text-white hover:bg-primary hover:text-white transition-colors cursor-pointer'
+          >
+            L
           </Button>
         </div>
-        <div className='flex items-center justify-between w-full'>
-          <p className='text-2xl font-bold'>$ {detailCoffee?.price}</p>
-          <Button>Buy Now</Button>
+        <div className='flex flex-col items-start justify-start gap-4 p-4'>
+          <h1 className='text-2xl font-bold'>{detailCoffee?.name}</h1>
+          <p className='text-lg'>{detailCoffee?.description}</p>
+          <div className='flex items-center justify-center gap-3'>
+            <Button>
+              <Minus />
+            </Button>
+            <p>1</p>
+            <Button>
+              <Plus />
+            </Button>
+          </div>
+          <div className='flex items-center justify-between w-full'>
+            <p className='text-2xl font-bold'>$ {detailCoffee?.price}</p>
+            <Button>Buy Now</Button>
+          </div>
         </div>
       </div>
     </div>
