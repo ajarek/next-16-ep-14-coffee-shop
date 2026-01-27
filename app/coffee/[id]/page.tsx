@@ -6,10 +6,19 @@ import Link from "next/link"
 import coffee from "@/data/coffee.json"
 import { Button } from "@/components/ui/button"
 import { use } from "react"
+import { useState } from "react"
+import { cn } from "@/lib/utils"
+import { useCartStore } from "@/store/cartStore"
+import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 const CoffeeDetails = ({ params }: { params: Promise<{ id: string }> }) => {
+  const router = useRouter()
   const { id } = use(params)
   const detailCoffee = coffee.find((item) => item.id === +id)
+  const [count, setCount] = useState(1)
+  const [size, setSize] = useState("S")
+  const { addItemToCart, items } = useCartStore()
   return (
     <div className='w-full h-[852px] flex flex-col  items-center justify-start  font-sans '>
       <div className='w-full h-24 flex items-center justify-between gap-5 bg-foreground px-4 pt-8 text-white'>
@@ -38,19 +47,31 @@ const CoffeeDetails = ({ params }: { params: Promise<{ id: string }> }) => {
         <div className='flex items-center justify-center gap-4 mt-4'>
           <Button
             variant='outline'
-            className='w-24 border-2 border-primary focus:bg-primary focus:text-white hover:bg-primary hover:text-white transition-colors cursor-pointer'
+            className={cn(
+              "w-24 border-2 border-primary focus:bg-primary focus:text-white hover:bg-primary hover:text-white transition-colors cursor-pointer",
+              size === "S" && "bg-primary text-white",
+            )}
+            onClick={() => setSize("S")}
           >
             S
           </Button>
           <Button
             variant='outline'
-            className='w-20 border-2 border-primary focus:bg-primary focus:text-white hover:bg-primary hover:text-white transition-colors cursor-pointer'
+            className={cn(
+              "w-20 border-2 border-primary focus:bg-primary focus:text-white hover:bg-primary hover:text-white transition-colors cursor-pointer",
+              size === "M" && "bg-primary text-white",
+            )}
+            onClick={() => setSize("M")}
           >
             M
           </Button>
           <Button
             variant='outline'
-            className='w-20 border-2 border-primary focus:bg-primary focus:text-white hover:bg-primary hover:text-white transition-colors cursor-pointer'
+            className={cn(
+              "w-20 border-2 border-primary focus:bg-primary focus:text-white hover:bg-primary hover:text-white transition-colors cursor-pointer",
+              size === "L" && "bg-primary text-white",
+            )}
+            onClick={() => setSize("L")}
           >
             L
           </Button>
@@ -59,17 +80,53 @@ const CoffeeDetails = ({ params }: { params: Promise<{ id: string }> }) => {
           <h1 className='text-2xl font-bold'>{detailCoffee?.name}</h1>
           <p className='text-lg'>{detailCoffee?.description}</p>
           <div className='flex items-center justify-center gap-3'>
-            <Button>
+            <Button
+              onClick={() => {
+                setCount(count > 1 ? count - 1 : count)
+              }}
+              className='cursor-pointer'
+            >
               <Minus />
             </Button>
-            <p>1</p>
-            <Button>
+            <p>{count}</p>
+            <Button
+              onClick={() => {
+                setCount(count + 1)
+              }}
+              className='cursor-pointer'
+            >
               <Plus />
             </Button>
           </div>
           <div className='flex items-center justify-between w-full'>
-            <p className='text-2xl font-bold'>$ {detailCoffee?.price}</p>
-            <Button>Buy Now</Button>
+            <p className='text-2xl font-bold'>
+              $ {((detailCoffee?.price || 0) * count).toFixed(2)}
+            </p>
+            <Button
+              onClick={() =>{
+                 if (items.some((i) => i.id === detailCoffee?.id)) {
+          toast("Product is already in the cart")
+          router.push("/coffee")
+          return
+        }
+                addItemToCart({
+                  id: detailCoffee?.id || 0,
+                  name: detailCoffee?.name || "",
+                  description: detailCoffee?.description || "",
+                  price: detailCoffee?.price || 0,
+                  image: detailCoffee?.image || "",
+                  quantity: count,
+                  size,
+                })
+                toast.success("Item added to cart")
+                setTimeout(() => {
+                  router.push("/coffee")
+                }, 1000)
+              }
+              }
+            >
+              Buy Now
+            </Button>
           </div>
         </div>
       </div>
