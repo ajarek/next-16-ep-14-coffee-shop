@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -11,13 +11,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
-import { ShoppingCart } from "lucide-react";
-import Link from "next/link";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { toast } from "sonner"
+import { ShoppingCart } from "lucide-react"
+import { useRouter } from "next/navigation"
 
-export const title = "Long Form with Many Fields";
+export const title = "Long Form with Many Fields"
 
 const formSchema = z.object({
   username: z.string().min(3),
@@ -29,9 +29,10 @@ const formSchema = z.object({
   city: z.string().min(2),
   state: z.string().min(2),
   zipCode: z.string().regex(/^\d{5}(-\d{4})?$/),
-});
+})
 
 const BuyerForm = () => {
+  const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,30 +46,31 @@ const BuyerForm = () => {
       state: "",
       zipCode: "",
     },
-  });
+  })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     toast("Form Submitted", {
       description: "Your form has been submitted successfully.",
-    });
+    })
+    router.push("/coffee/payment")
   }
 
   return (
-    <div className="w-full max-w-md">
+    <div className='w-full max-w-md'>
       <Form {...form}>
-        <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="space-y-4">
-            <h3 className="font-medium text-lg">Account Details</h3>
+        <form className='space-y-6' onSubmit={form.handleSubmit(onSubmit)}>
+          <div className='space-y-4'>
+            <h3 className='font-medium text-lg'>Account Details</h3>
             <FormField
               control={form.control}
-              name="username"
+              name='username'
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
                     <Input
-                      className="bg-background"
-                      placeholder="johndoe"
+                      className='bg-background'
+                      placeholder='johndoe'
                       {...field}
                     />
                   </FormControl>
@@ -78,15 +80,15 @@ const BuyerForm = () => {
             />
             <FormField
               control={form.control}
-              name="email"
+              name='email'
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
-                      className="bg-background"
-                      placeholder="john@example.com"
-                      type="email"
+                      className='bg-background'
+                      placeholder='john@example.com'
+                      type='email'
                       {...field}
                     />
                   </FormControl>
@@ -95,19 +97,19 @@ const BuyerForm = () => {
               )}
             />
           </div>
-          <div className="space-y-4">
-            <h3 className="font-medium text-lg">Personal Information</h3>
-            <div className="grid grid-cols-2 gap-4">
+          <div className='space-y-4'>
+            <h3 className='font-medium text-lg'>Personal Information</h3>
+            <div className='grid grid-cols-2 gap-4'>
               <FormField
                 control={form.control}
-                name="firstName"
+                name='firstName'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>First Name</FormLabel>
                     <FormControl>
                       <Input
-                        className="bg-background"
-                        placeholder="John"
+                        className='bg-background'
+                        placeholder='John'
                         {...field}
                       />
                     </FormControl>
@@ -117,14 +119,14 @@ const BuyerForm = () => {
               />
               <FormField
                 control={form.control}
-                name="lastName"
+                name='lastName'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Last Name</FormLabel>
                     <FormControl>
                       <Input
-                        className="bg-background"
-                        placeholder="Doe"
+                        className='bg-background'
+                        placeholder='Doe'
                         {...field}
                       />
                     </FormControl>
@@ -135,15 +137,15 @@ const BuyerForm = () => {
             </div>
             <FormField
               control={form.control}
-              name="phone"
+              name='phone'
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Phone</FormLabel>
                   <FormControl>
                     <Input
-                      className="bg-background"
-                      placeholder="+1 (555) 123-4567"
-                      type="tel"
+                      className='bg-background'
+                      placeholder='+1 (555) 123-4567'
+                      type='tel'
                       {...field}
                     />
                   </FormControl>
@@ -152,18 +154,18 @@ const BuyerForm = () => {
               )}
             />
           </div>
-          <div className="space-y-4">
-            <h3 className="font-medium text-lg">Address</h3>
+          <div className='space-y-4'>
+            <h3 className='font-medium text-lg'>Address</h3>
             <FormField
               control={form.control}
-              name="street"
+              name='street'
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Street</FormLabel>
                   <FormControl>
                     <Input
-                      className="bg-background"
-                      placeholder="123 Main St"
+                      className='bg-background'
+                      placeholder='123 Main St'
                       {...field}
                     />
                   </FormControl>
@@ -171,17 +173,17 @@ const BuyerForm = () => {
                 </FormItem>
               )}
             />
-            <div className="grid grid-cols-3 gap-4">
+            <div className='grid grid-cols-3 gap-4'>
               <FormField
                 control={form.control}
-                name="city"
+                name='city'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>City</FormLabel>
                     <FormControl>
                       <Input
-                        className="bg-background"
-                        placeholder="New York"
+                        className='bg-background'
+                        placeholder='New York'
                         {...field}
                       />
                     </FormControl>
@@ -191,14 +193,14 @@ const BuyerForm = () => {
               />
               <FormField
                 control={form.control}
-                name="state"
+                name='state'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>State</FormLabel>
                     <FormControl>
                       <Input
-                        className="bg-background"
-                        placeholder="NY"
+                        className='bg-background'
+                        placeholder='NY'
                         {...field}
                       />
                     </FormControl>
@@ -208,14 +210,14 @@ const BuyerForm = () => {
               />
               <FormField
                 control={form.control}
-                name="zipCode"
+                name='zipCode'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>ZIP</FormLabel>
                     <FormControl>
                       <Input
-                        className="bg-background"
-                        placeholder="10001"
+                        className='bg-background'
+                        placeholder='10001'
                         {...field}
                       />
                     </FormControl>
@@ -225,16 +227,14 @@ const BuyerForm = () => {
               />
             </div>
           </div>
-          <Button asChild className="w-full text-lg cursor-pointer" type="submit">
-            <Link href="/coffee/payment">
-              <ShoppingCart/>
-              Pay
-            </Link>
+          <Button className='w-full text-lg cursor-pointer' type='submit'>
+            <ShoppingCart />
+            Pay
           </Button>
         </form>
       </Form>
     </div>
-  );
-};
+  )
+}
 
-export default BuyerForm;
+export default BuyerForm
