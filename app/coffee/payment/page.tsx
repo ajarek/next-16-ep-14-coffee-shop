@@ -1,14 +1,13 @@
-import { SignedIn, UserButton } from "@clerk/nextjs"
-import PhoneIndicators from "@/components/PhoneIndicators"
-import BuyerForm from "@/components/BuyerForm"
+import PhoneIndicators from '@/components/PhoneIndicators'
+import { SignedIn, UserButton } from '@clerk/nextjs'
 
-const Checkout = () => {
+const Payment = () => {
   return (
     <div className='w-full h-[852px] flex flex-col items-center justify-start '>
       <PhoneIndicators />
       <div className='w-full h-24 flex  items-center justify-center pt-10 bg-foreground px-4'>
         <h1 className='w-full text-4xl text-center font-semibold text-white  '>
-          Checkout
+          Payment
         </h1>
 
         <SignedIn>
@@ -16,10 +15,10 @@ const Checkout = () => {
         </SignedIn>
       </div>
       <div className="p-4">
-        <BuyerForm />
+       
       </div>
     </div>
   )
 }
 
-export default Checkout
+export default Payment
