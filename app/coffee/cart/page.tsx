@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { useCartStore } from '@/store/cartStore'
 import { Trash2 } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const Cart = () => {
   const { items, decrement, increment, removeItemFromCart} = useCartStore()
@@ -38,7 +39,9 @@ const Cart = () => {
           <h2 className='w-full text-xl  text-primary'>Total</h2>
           <p className='text-xl font-serif font-bold text-primary'>${items.reduce((total, item) => total + (item.price||0) * (item?.quantity||0), 0).toFixed(2)}</p>
         </div>
-        <Button className='w-full h-12 flex items-center justify-center bg-primary text-white rounded-lg cursor-pointer'>Checkout</Button>
+        <Button asChild className='w-[92%] h-12 flex items-center justify-center bg-primary text-white rounded-lg cursor-pointer mx-auto text-lg font-semibold'>
+          <Link href='/coffee/checkout'>Checkout</Link>
+        </Button>
       </div>
      
       

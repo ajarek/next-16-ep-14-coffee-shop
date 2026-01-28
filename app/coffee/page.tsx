@@ -1,15 +1,18 @@
 'use client'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Plus, Search } from "lucide-react"
+import { Handbag, Plus, Search } from "lucide-react"
 import coffee from "../../data/coffee.json"
 import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import Link from "next/link"
 import { useState } from "react"
+import { useCartStore } from "@/store/cartStore"
 
 const CoffeeList = () => {
   const [search, setSearch] = useState("")
+  const { items } = useCartStore()
+  const cartCount = items.reduce((total, item) => total + (item.quantity ?? 1), 0)
   return (
     <div className='w-full h-[852px] flex flex-col  items-center justify-start  font-sans '>
       <div className='w-full h-32 flex flex-col items-center justify-center gap-5 bg-foreground px-4 pt-8 '>
@@ -20,6 +23,14 @@ const CoffeeList = () => {
               <Search className='text-foreground' />
             </span>
           </div>
+          <Link
+        href='/coffee/cart'
+        className='relative text-secondary  '
+      >
+        {" "}
+        <Handbag size={30} color='white'/>{" "}
+        <span className="absolute bottom-5 left-4 w-6 h-6 flex items-center justify-center bg-primary rounded-full text-white hover:text-primary transition-colors">{cartCount}</span>
+      </Link>
         </div>
       </div>
       <div className='w-full h-[calc(852px-128px-64px)] grid grid-cols-2  gap-4 overflow-auto p-2 justify-items-center overflow-y-auto  scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-primary'>
