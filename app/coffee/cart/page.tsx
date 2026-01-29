@@ -1,5 +1,5 @@
 "use client"
-import PhoneIndicators from "@/components/PhoneIndicators"
+
 import { Button } from "@/components/ui/button"
 import { useCartStore } from "@/store/cartStore"
 import { Trash2 } from "lucide-react"
@@ -9,9 +9,8 @@ import Link from "next/link"
 const Cart = () => {
   const { items, decrement, increment, removeItemFromCart } = useCartStore()
   return (
-    <div className='w-[393px] h-[852px]'>
-      <PhoneIndicators />
-      <div className='w-full h-24 flex items-center justify-between gap-5 bg-foreground pt-8 text-white'>
+    <div className='w-full max-w-[440px]'>
+      <div className='w-full h-24 flex items-center justify-between gap-5 bg-foreground text-white'>
         <h1 className='w-full text-4xl text-center font-semibold text-white '>
           Cart
         </h1>

@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
 import { motion } from "framer-motion"
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
+import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs"
 import ButtonCleanCart from "@/components/ButtonCleanCart"
 
 export default function PaymentPage() {
@@ -17,6 +17,7 @@ export default function PaymentPage() {
   const { total, removeAllFromCart } = useCartStore()
   const totalAmount = total()
 
+  const { user } = useUser()
   const [paymentMethod, setPaymentMethod] = useState<"card" | "wallet">("card")
   const [isLoading, setIsLoading] = useState(false)
 
@@ -34,7 +35,7 @@ export default function PaymentPage() {
   return (
     <div className='w-full h-[852px] flex flex-col items-center justify-start font-sans bg-[#F9F9F9]'>
       {/* Header */}
-      <div className='w-full h-24 flex items-center justify-between gap-5 bg-foreground px-4 pt-8 text-white'>
+      <div className='w-full h-24 flex items-center justify-between gap-5 bg-foreground px-4 text-white'>
         <Link href='/coffee/cart'>
           <ChevronLeft size={30} />
         </Link>
@@ -77,7 +78,7 @@ export default function PaymentPage() {
                 <div className='flex flex-col'>
                   <span>Card Holder</span>
                   <span className='font-semibold text-sm normal-case'>
-                    Anderson Jarek
+                    {user?.firstName} {user?.lastName}
                   </span>
                 </div>
                 <div className='flex flex-col items-end'>
@@ -122,19 +123,19 @@ export default function PaymentPage() {
             <Input
               placeholder='Card Number'
               className='bg-white border-gray-200 h-12 rounded-xl focus:border-primary focus:ring-primary/20 transition-all font-mono'
-              defaultValue={'4242 4242 4242 4242'}
+              defaultValue={"4242 4242 4242 4242"}
             />
             <div className='flex gap-3'>
               <Input
                 placeholder='MM/YY'
                 className='bg-white border-gray-200 h-12 rounded-xl focus:border-primary focus:ring-primary/20 transition-all font-mono'
-                defaultValue={'12/28'}
+                defaultValue={"12/28"}
               />
               <Input
                 placeholder='CVC'
                 type='password'
                 className='bg-white border-gray-200 h-12 rounded-xl focus:border-primary focus:ring-primary/20 transition-all font-mono'
-                defaultValue={'123'}
+                defaultValue={"123"}
               />
             </div>
           </div>
@@ -144,7 +145,10 @@ export default function PaymentPage() {
         <div className='mt-auto pt-6 border-t border-dashed border-gray-200'>
           <div className='flex justify-between items-center mb-6'>
             <span className='text-gray-500 font-medium'>Total Amount</span>
-            <span className='text-2xl font-bold text-gray-900'>
+            <span
+              className='text-2xl font-bold text-gray-900'
+              suppressHydrationWarning
+            >
               ${totalAmount.toFixed(2)}
             </span>
           </div>

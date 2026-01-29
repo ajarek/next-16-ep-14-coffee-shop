@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronLeft, Handbag, Heart, Minus, Plus } from "lucide-react"
+import { ChevronLeft, Handbag, Minus, Plus } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import coffee from "@/data/coffee.json"
@@ -19,22 +19,24 @@ const CoffeeDetails = ({ params }: { params: Promise<{ id: string }> }) => {
   const [count, setCount] = useState(1)
   const [size, setSize] = useState("S")
   const { addItemToCart, items } = useCartStore()
-  const cartCount = items.reduce((total, item) => total + (item.quantity ?? 1), 0)
+  const cartCount = items.reduce(
+    (total, item) => total + (item.quantity ?? 1),
+    0,
+  )
   return (
     <div className='w-full h-[852px] flex flex-col  items-center justify-start  font-sans '>
-      <div className='w-full h-24 flex items-center justify-between gap-5 bg-foreground px-4 pt-8 text-white'>
+      <div className='w-full h-24 flex items-center justify-between gap-5 bg-foreground px-4 text-white'>
         <Link href='/coffee'>
           <ChevronLeft size={30} className='' />
         </Link>
         <h1 className='text-xl font-bold'>Coffee Details</h1>
-        <Link
-        href='/coffee/cart'
-        className='relative text-secondary  '
-      >
-        {" "}
-        <Handbag size={30} color='white'/>{" "}
-        <span className="absolute bottom-5 left-4 w-6 h-6 flex items-center justify-center bg-primary rounded-full text-white hover:text-primary transition-colors">{cartCount}</span>
-      </Link>
+        <Link href='/coffee/cart' className='relative text-secondary  '>
+          {" "}
+          <Handbag size={30} color='white' />{" "}
+          <span className='absolute bottom-5 left-4 w-6 h-6 flex items-center justify-center bg-primary rounded-full text-white hover:text-primary transition-colors'>
+            {cartCount}
+          </span>
+        </Link>
       </div>
       <div className='w-full h-[calc(852px-96px-64px)] '>
         <div className='w-full flex items-center justify-center'>
@@ -105,12 +107,12 @@ const CoffeeDetails = ({ params }: { params: Promise<{ id: string }> }) => {
               $ {((detailCoffee?.price || 0) * count).toFixed(2)}
             </p>
             <Button
-              onClick={() =>{
-                 if (items.some((i) => i.id === detailCoffee?.id)) {
-          toast("Product is already in the cart")
-          router.push("/coffee")
-          return
-        }
+              onClick={() => {
+                if (items.some((i) => i.id === detailCoffee?.id)) {
+                  toast("Product is already in the cart")
+                  router.push("/coffee")
+                  return
+                }
                 addItemToCart({
                   id: detailCoffee?.id || 0,
                   name: detailCoffee?.name || "",
@@ -124,8 +126,7 @@ const CoffeeDetails = ({ params }: { params: Promise<{ id: string }> }) => {
                 setTimeout(() => {
                   router.push("/coffee")
                 }, 1000)
-              }
-              }
+              }}
             >
               Buy Now
             </Button>

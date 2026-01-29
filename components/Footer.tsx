@@ -5,7 +5,10 @@ import { useCartStore } from "@/store/cartStore"
 
 const Footer = () => {
   const { items } = useCartStore()
-  const cartCount = items.reduce((total, item) => total + (item.quantity ?? 1), 0)
+  const cartCount = items.reduce(
+    (total, item) => total + (item.quantity ?? 1),
+    0,
+  )
   return (
     <div className='w-full h-16 flex items-center justify-center gap-8'>
       <Link
@@ -28,7 +31,9 @@ const Footer = () => {
       >
         {" "}
         <Handbag size={30} />{" "}
-        <span className="absolute bottom-5 left-4 w-6 h-6 flex items-center justify-center bg-primary rounded-full text-white">{cartCount}</span>
+        <span className='absolute bottom-5 left-4 w-6 h-6 flex items-center justify-center bg-primary rounded-full text-white'>
+          {cartCount}
+        </span>
       </Link>
       <Link
         href='/'
