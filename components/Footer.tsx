@@ -15,22 +15,19 @@ const Footer = () => {
         href='/'
         className='text-secondary hover:text-primary transition-colors'
       >
-        {" "}
-        <Home size={30} />{" "}
+        <Home size={30} />
       </Link>
       <Link
         href='/coffee'
         className='text-secondary hover:text-primary transition-colors'
       >
-        {" "}
-        <Coffee size={30} />{" "}
+        <Coffee size={30} />
       </Link>
       <Link
         href='/coffee/cart'
         className='relative text-secondary hover:text-primary transition-colors '
       >
-        {" "}
-        <Handbag size={30} />{" "}
+        <Handbag size={30} />
         <span className='absolute bottom-5 left-4 w-6 h-6 flex items-center justify-center bg-primary rounded-full text-white'>
           {cartCount}
         </span>
@@ -39,8 +36,7 @@ const Footer = () => {
         href='/'
         className='text-secondary hover:text-primary transition-colors'
       >
-        {" "}
-        <Bell size={30} />{" "}
+        <Bell size={30} />
       </Link>
     </div>
   )
